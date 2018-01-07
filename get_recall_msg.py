@@ -6,8 +6,8 @@ import sys
 import time
 import re
 
-reload(sys)
-sys.setdefaultencoding('utf8')
+#reload(sys)
+#sys.setdefaultencoding('utf8')
 import os
 
 msg_information = {}
@@ -23,11 +23,11 @@ def handle_receive_msg(msg):
     msg_id = msg['MsgId']    #每条信息的id
     msg_content = None      #储存信息的内容
     msg_share_url = None    #储存分享的链接，比如分享的文章和音乐
-    print msg['Type']
-    print msg['MsgId']
+    print(msg['Type'])
+    print(msg['MsgId'])
     if msg['Type'] == 'Text' or msg['Type'] == 'Friends':     #如果发送的消息是文本或者好友推荐
         msg_content = msg['Text']
-        print msg_content
+        print(msg_content)
 
     #如果发送的消息是附件、视屏、图片、语音
     elif msg['Type'] == "Attachment" or msg['Type'] == "Video" \
@@ -35,7 +35,7 @@ def handle_receive_msg(msg):
             or msg['Type'] == 'Recording':
         msg_content = msg['FileName']    #内容就是他们的文件名
         msg['Text'](str(msg_content))    #下载文件
-        # print msg_content
+        #print(msg_content)
     elif msg['Type'] == 'Card':    #如果消息是推荐的名片
         msg_content = msg['RecommendInfo']['NickName'] + '的名片'    #内容就是推荐人的昵称和性别
         if msg['RecommendInfo']['Sex'] == 1:
@@ -43,7 +43,7 @@ def handle_receive_msg(msg):
         else:
             msg_content += '性别为女'
 
-        print msg_content
+        print(msg_content)
     elif msg['Type'] == 'Map':    #如果消息为分享的位置信息
         x, y, location = re.search(
             "<location x=\"(.*?)\" y=\"(.*?)\".*label=\"(.*?)\".*", msg['OriContent']).group(1, 2, 3)
@@ -54,7 +54,7 @@ def handle_receive_msg(msg):
     elif msg['Type'] == 'Sharing':     #如果消息为分享的音乐或者文章，详细的内容为文章的标题或者是分享的名字
         msg_content = msg['Text']
         msg_share_url = msg['Url']       #记录分享的url
-        print msg_share_url
+        print(msg_share_url)
     face_bug=msg_content
 
 ##将信息存储在字典中，每一个msg_id对应一条信息
@@ -76,7 +76,7 @@ def information(msg):
     if '撤回了一条消息' in msg['Content']:
         old_msg_id = re.search("\<msgid\>(.*?)\<\/msgid\>", msg['Content']).group(1)   #在返回的content查找撤回的消息的id
         old_msg = msg_information.get(old_msg_id)    #得到消息
-        print old_msg
+        print(old_msg)
         if len(old_msg_id)<11:  #如果发送的是表情包
             itchat.send_file(face_bug,toUserName='filehelper')
         else:  #发送撤回的提示给文件助手
