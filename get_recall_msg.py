@@ -5,7 +5,9 @@ from itchat.content import *
 import sys
 import time
 import re
+import io
 
+sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
 #reload(sys)
 #sys.setdefaultencoding('utf8')
 import os

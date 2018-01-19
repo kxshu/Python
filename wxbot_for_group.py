@@ -5,6 +5,8 @@ import ConfigParser
 import json
 
 
+
+
 class TulingWXBot(WXBot):
     def __init__(self):
         WXBot.__init__(self)

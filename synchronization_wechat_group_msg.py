@@ -1,8 +1,7 @@
-#!/usr/bin/env python
 # coding:utf8
 import sys
-reload(sys)
-sys.setdefaultencoding( "utf8" )
+import io
+sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
 
 import itchat
 from itchat.content import *
@@ -11,13 +10,13 @@ from itchat.content import *
 # isGroupChat=False表示非群聊消息
 @itchat.msg_register([TEXT, MAP, CARD, NOTE, SHARING], isGroupChat=False)
 def text_reply(msg):
-    itchat.send('这是我的小号，暂无调戏功能，有事请加我大号：Honlann', msg['FromUserName'])
+    itchat.send('我是你消息的搬运工', msg['FromUserName'])
 
 # 自动回复图片等类别消息
 # isGroupChat=False表示非群聊消息
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO], isGroupChat=False)
 def download_files(msg):
-    itchat.send('这是我的小号，暂无调戏功能，有事请加我大号：Honlann', msg['FromUserName'])
+    itchat.send('我是你消息的搬运工', msg['FromUserName'])
 
 # 自动处理添加好友申请
 @itchat.msg_register(FRIENDS)
@@ -82,8 +81,15 @@ itchat.auto_login(hotReload=True)
 # 获取所有通讯录中的群聊
 # 需要在微信中将需要同步的群聊都保存至通讯录
 chatrooms = itchat.get_chatrooms(update=True, contactOnly=True)
+print(chatrooms)
+#chatrooms = itchat.get_chatrooms(update=True)
 chatroom_ids = [c['UserName'] for c in chatrooms]
-print '正在监测的群聊：', len(chatrooms), '个'
-print ' '.join([item['NickName'] for item in chatrooms])
+# for it in chatrooms:
+#     print(it['NickName'])
+
+
+print('正在监测的群聊：', len(chatrooms), '个')
+
+print(' '.join([item['NickName'] for item in chatrooms]))
 # 开始监测
 itchat.run()

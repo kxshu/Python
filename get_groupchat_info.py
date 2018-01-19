@@ -4,7 +4,8 @@ import io
 sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
 
 import  itchat
-itchat.auto_login(hotReload=True)
+#itchat.auto_login(hotReload=True)
+#itchat.auto_login(hotReload=True)
 
 #itchat.run()
 
