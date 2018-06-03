@@ -1,13 +1,15 @@
 # coding:utf8
-import sys
 import io
+import sys
+
+import itchat
+
 sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
 
-import  itchat
-#itchat.auto_login(hotReload=True)
+itchat.auto_login(hotReload=True)
 #itchat.auto_login(hotReload=True)
 
-#itchat.run()
+itchat.run()
 
 mpsList=itchat.get_chatrooms(update=True, contactOnly=True)[1:]
 #mpsList=itchat.get_chatrooms(update=True)[1:]
