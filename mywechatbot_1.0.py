@@ -1,11 +1,12 @@
-#!/usr/bin/env python
 # coding:utf8
+import io
 import sys
-reload(sys)
-sys.setdefaultencoding( "utf8" )
 
 import itchat
-from itchat.content import *
+
+sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
+
+
 
 # 自动回复文本等类别消息
 # isGroupChat=False表示非群聊消息
@@ -83,7 +84,7 @@ itchat.auto_login(hotReload=True)
 # 需要在微信中将需要同步的群聊都保存至通讯录
 chatrooms = itchat.get_chatrooms(update=True, contactOnly=True)
 chatroom_ids = [c['UserName'] for c in chatrooms]
-print '正在监测的群聊：', len(chatrooms), '个'
-print ' '.join([item['NickName'] for item in chatrooms])
+print('正在监测的群聊：', len(chatrooms)), '个'
+print(' '.join([item['NickName'] for item in chatrooms]))
 # 开始监测
 itchat.run()

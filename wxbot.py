@@ -1,21 +1,22 @@
 # coding: utf-8
 
+import HTMLParser
+import json
+import mimetypes
 import os
+import random
+import re
 import sys
+import time
 import traceback
+import urllib
 import webbrowser
+import xml.dom.minidom
+from traceback import format_exc
+
 import pyqrcode
 import requests
-import mimetypes
-import json
-import xml.dom.minidom
-import urllib
-import time
-import re
-import random
-from traceback import format_exc
 from requests.exceptions import ConnectionError, ReadTimeout
-import HTMLParser
 
 UNKONWN = 'unkonwn'
 SUCCESS = '200'
